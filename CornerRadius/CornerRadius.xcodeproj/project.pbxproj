@@ -207,15 +207,18 @@
 					9B4915411C81D6080008161A = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = U2HX3RFD94;
+						LastSwiftMigration = 0810;
 					};
 					9B4915551C81D6080008161A = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = U2HX3RFD94;
+						LastSwiftMigration = 0810;
 						TestTargetID = 9B4915411C81D6080008161A;
 					};
 					9B4915601C81D6080008161A = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = U2HX3RFD94;
+						LastSwiftMigration = 0810;
 						TestTargetID = 9B4915411C81D6080008161A;
 					};
 				};
@@ -423,6 +426,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CornerRadius/CornerRadius-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -436,6 +440,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = NEU.CornerRadius;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CornerRadius/CornerRadius-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -447,6 +452,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NEU.CornerRadiusTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CornerRadius.app/CornerRadius";
 			};
 			name = Debug;
@@ -459,6 +465,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NEU.CornerRadiusTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CornerRadius.app/CornerRadius";
 			};
 			name = Release;
@@ -470,6 +477,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NEU.CornerRadiusUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CornerRadius;
 				USES_XCTRUNNER = YES;
 			};
@@ -482,6 +490,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NEU.CornerRadiusUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = CornerRadius;
 				USES_XCTRUNNER = YES;
 			};

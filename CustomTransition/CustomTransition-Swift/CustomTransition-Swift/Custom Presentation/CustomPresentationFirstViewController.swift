@@ -10,7 +10,7 @@ import UIKit
 
 class CustomPresentationFirstViewController: UIViewController {
     lazy var customPresentationSecondViewController: CustomPresentationSecondViewController = CustomPresentationSecondViewController()
-    lazy var customPresentationController: CustomPresentationController = CustomPresentationController(presentedViewController: self.customPresentationSecondViewController, presentingViewController: self)
+    lazy var customPresentationController: CustomPresentationController = CustomPresentationController(presentedViewController: self.customPresentationSecondViewController, presenting: self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +28,11 @@ class CustomPresentationFirstViewController: UIViewController {
 // MARK: - UI事件处理
 extension CustomPresentationFirstViewController {
     func animationButtonDidClicked() {
-        self.presentViewController(customPresentationSecondViewController, animated: true, completion: nil)
+        self.present(customPresentationSecondViewController, animated: true, completion: nil)
     }
     
     func leftBarButtonDidClicked() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -43,7 +43,7 @@ extension CustomPresentationFirstViewController {
         
         /// 设置navigationItem
         navigationItem.title = "自定义Presentation"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("leftBarButtonDidClicked"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.plain, target: self, action: Selector("leftBarButtonDidClicked"))
         
         // 创建label
         let label = UILabel()
@@ -58,9 +58,9 @@ extension CustomPresentationFirstViewController {
         
         /// 创建button
         let button = UIButton()
-        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        button.setTitle("演示动画", forState: .Normal)
-        button.addTarget(self, action: Selector("animationButtonDidClicked"), forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.blue, for: UIControlState())
+        button.setTitle("演示动画", for: UIControlState())
+        button.addTarget(self, action: Selector("animationButtonDidClicked"), for: .touchUpInside)
         view.addSubview(button)
         button.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)

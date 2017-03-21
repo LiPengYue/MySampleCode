@@ -16,7 +16,7 @@ class InteractivitySecondViewController: UIViewController {
         setupView() // 主要是一些UI控件的布局，可以无视其实现细节
         
         /// 添加滑动交互手势
-        interactiveTransitionRecognizer.edges = .Left
+        interactiveTransitionRecognizer.edges = .left
         self.view.addGestureRecognizer(interactiveTransitionRecognizer)
     }
 
@@ -28,8 +28,8 @@ class InteractivitySecondViewController: UIViewController {
 
 // MARK: - 手势识别
 extension InteractivitySecondViewController {
-    func interactiveTransitionRecognizerAction(sender: UIScreenEdgePanGestureRecognizer) {
-        if sender.state == .Began {
+    func interactiveTransitionRecognizerAction(_ sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .began {
             self.buttonDidClicked(sender)
         }
     }
@@ -37,18 +37,18 @@ extension InteractivitySecondViewController {
 
 // MARK: - 处理UI控件的点击事件
 extension InteractivitySecondViewController {
-    func buttonDidClicked(sender: AnyObject) {
+    func buttonDidClicked(_ sender: AnyObject) {
         // 和FirstViewController中的代码是类似的，不过返回时手势应该是从左向右
         if let transitionDelegate = self.transitioningDelegate as? InteractivityTransitionDelegate {
-            if sender.isKindOfClass(UIGestureRecognizer) {
+            if sender.isKind(of: UIGestureRecognizer) {
                 transitionDelegate.gestureRecognizer = interactiveTransitionRecognizer
             }
             else {
                 transitionDelegate.gestureRecognizer = nil
             }
-            transitionDelegate.targetEdge = .Left
+            transitionDelegate.targetEdge = .left
         }
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -60,7 +60,7 @@ extension InteractivitySecondViewController {
         /// 创建label
         let label = UILabel()
         label.text = "To"
-        label.textAlignment = .Center
+        label.textAlignment = .center
         label.font = UIFont(name: "Helvetica", size: 60)
         view.addSubview(label)
         label.snp_makeConstraints { (make) -> Void in
@@ -71,9 +71,9 @@ extension InteractivitySecondViewController {
         
         /// 创建button
         let button = UIButton()
-        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        button.setTitle("Dismiss", forState: .Normal)
-        button.addTarget(self, action: Selector("buttonDidClicked:"), forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.blue, for: UIControlState())
+        button.setTitle("Dismiss", for: UIControlState())
+        button.addTarget(self, action: Selector("buttonDidClicked:"), for: .touchUpInside)
         view.addSubview(button)
         button.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)

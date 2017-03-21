@@ -11,7 +11,7 @@ import Foundation
 /**
  节点颜色
  */
-enum Color { case R, B }
+enum Color { case r, b }
 
 /**
 用枚举定义一颗红黑树
@@ -20,10 +20,10 @@ enum Color { case R, B }
 - Node: 表示这是一个非空节点
 */
 indirect enum Tree<Element: Comparable> {
-    case Empty
-    case Node(Color,Tree<Element>,Element,Tree<Element>)
+    case empty
+    case node(Color,Tree<Element>,Element,Tree<Element>)
     
-    init() { self = .Empty }  //创建空红黑树
+    init() { self = .empty }  //创建空红黑树
     
     /**
     创建非空红黑树
@@ -35,9 +35,9 @@ indirect enum Tree<Element: Comparable> {
     
     :returns: 返回创建好了的红黑树
     */
-    init(_ x: Element, color: Color = .B,
-        left: Tree<Element> = .Empty, right: Tree<Element> = .Empty){
-        self = .Node(color, left, x, right)
+    init(_ x: Element, color: Color = .b,
+        left: Tree<Element> = .empty, right: Tree<Element> = .empty){
+        self = .node(color, left, x, right)
     }
 }
 
@@ -49,10 +49,10 @@ indirect enum Tree<Element: Comparable> {
  
  :returns: 插入值后的树
  */
-private func ins<T>(into: Tree<T>, _ x: T) -> Tree<T> {
+private func ins<T>(_ into: Tree<T>, _ x: T) -> Tree<T> {
     /// 如果原来的树为空，就返回一颗新建的数，根节点的值为x
-    guard case let .Node(c, l, y, r) = into
-        else { return Tree(x, color: .R) }
+    guard case let .node(c, l, y, r) = into
+        else { return Tree(x, color: .r) }
     
     if x < y { return balance(Tree(y, color: c, left: ins(l,x), right: r)) }
     if y < x { return balance(Tree(y, color: c, left: l, right: ins(r, x))) }
@@ -66,16 +66,16 @@ private func ins<T>(into: Tree<T>, _ x: T) -> Tree<T> {
  
  :returns: 处理后的树
  */
-private func balance<T>(tree: Tree<T>) -> Tree<T> {
+private func balance<T>(_ tree: Tree<T>) -> Tree<T> {
     switch tree {
-    case let .Node(.B, .Node(.R, .Node(.R, a, x, b), y, c), z, d):
-        return .Node(.R, .Node(.B,a,x,b),y,.Node(.B,c,z,d))
-    case let .Node(.B, .Node(.R, a, x, .Node(.R, b, y, c)), z, d):
-        return .Node(.R, .Node(.B,a,x,b),y,.Node(.B,c,z,d))
-    case let .Node(.B, a, x, .Node(.R, .Node(.R, b, y, c), z, d)):
-        return .Node(.R, .Node(.B,a,x,b),y,.Node(.B,c,z,d))
-    case let .Node(.B, a, x, .Node(.R, b, y, .Node(.R, c, z, d))):
-        return .Node(.R, .Node(.B,a,x,b),y,.Node(.B,c,z,d))
+    case let .node(.b, .node(.r, .node(.r, a, x, b), y, c), z, d):
+        return .node(.r, .node(.b,a,x,b),y,.node(.b,c,z,d))
+    case let .node(.b, .node(.r, a, x, .node(.r, b, y, c)), z, d):
+        return .node(.r, .node(.b,a,x,b),y,.node(.b,c,z,d))
+    case let .node(.b, a, x, .node(.r, .node(.r, b, y, c), z, d)):
+        return .node(.r, .node(.b,a,x,b),y,.node(.b,c,z,d))
+    case let .node(.b, a, x, .node(.r, b, y, .node(.r, c, z, d))):
+        return .node(.r, .node(.b,a,x,b),y,.node(.b,c,z,d))
     default:
         return tree
     }
@@ -90,8 +90,8 @@ extension Tree {
      
      :returns: 是否找到
      */
-    func contains(x: Element) -> Bool {
-        guard case let .Node(_,left,y,right) = self
+    func contains(_ x: Element) -> Bool {
+        guard case let .node(_,left,y,right) = self
             else { return false }
         
         if x < y { return left.contains(x) }
@@ -109,35 +109,35 @@ extension Tree {
      
      :returns: 插入元素后的树
      */
-    func insert(x: Element) -> Tree {
-        guard case let .Node(_,l,y,r) = ins(self, x)
+    func insert(_ x: Element) -> Tree {
+        guard case let .node(_,l,y,r) = ins(self, x)
             else { fatalError("ins should never return an empty tree") }
         
-        return .Node(.B,l,y,r)
+        return .node(.b,l,y,r)
     }
 }
 
 // MARK: - 实现SequenceType协议，遍历树
-extension Tree: SequenceType {
+extension Tree: Sequence {
     /**
      中序遍历树
      
      :returns: 返回一个生成器，通过for循环遍历树，在main.swift中对这个方法进行了测试
      */
-    func generate() -> AnyGenerator<Element> {
+    func makeIterator() -> AnyIterator<Element> {
         var stack: [Tree] = []
         var current: Tree = self
         
-        return anyGenerator { _ -> Element? in
+        return AnyIterator { _ -> Element? in
             while true {
                 // if there's a left-hand node, head down it
-                if case let .Node(_,l,_,_) = current {
+                if case let .node(_,l,_,_) = current {
                     stack.append(current)
                     current = l
                 }
                     // if there isn’t, head back up, going right as
                     // soon as you can:
-                else if !stack.isEmpty, case let .Node(_,_,x,r) = stack.removeLast() {
+                else if !stack.isEmpty, case let .node(_,_,x,r) = stack.removeLast() {
                     current = r
                     return x
                 }
@@ -151,7 +151,7 @@ extension Tree: SequenceType {
 }
 
 // MARK: - 实现ArrayLiteralConvertible协议，通过数组字面量生成红黑树
-extension Tree: ArrayLiteralConvertible {
+extension Tree: ExpressibleByArrayLiteral {
     /**
      初始化方法，把数组中每个元素插入到树中
      
@@ -159,7 +159,7 @@ extension Tree: ArrayLiteralConvertible {
      
      :returns: 初始化完成的树
      */
-    init <S: SequenceType where S.Generator.Element == Element>(_ source: S) {
+    init <S: Sequence>(_ source: S) where S.Iterator.Element == Element {
         self = source.reduce(Tree()) { $0.insert($1) }
     }
     

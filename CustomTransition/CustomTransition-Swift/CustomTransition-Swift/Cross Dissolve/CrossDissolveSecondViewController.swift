@@ -21,7 +21,7 @@ extension CrossDissolveSecondViewController {
         /**
         *  应该由FirstVC执行下面这行代码，为了保持demo简单，突出重点，这里的写法其实是不严格的，请见谅
         */
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -33,7 +33,7 @@ extension CrossDissolveSecondViewController {
         /// 创建label
         let label = UILabel()
         label.text = "To"
-        label.textAlignment = .Center
+        label.textAlignment = .center
         label.font = UIFont(name: "Helvetica", size: 60)
         view.addSubview(label)
         label.snp_makeConstraints { (make) -> Void in
@@ -44,9 +44,9 @@ extension CrossDissolveSecondViewController {
         
         /// 创建button
         let button = UIButton()
-        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        button.setTitle("Dismiss", forState: .Normal)
-        button.addTarget(self, action: Selector("buttonDidClicked"), forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.blue, for: UIControlState())
+        button.setTitle("Dismiss", for: UIControlState())
+        button.addTarget(self, action: Selector("buttonDidClicked"), for: .touchUpInside)
         view.addSubview(button)
         button.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)

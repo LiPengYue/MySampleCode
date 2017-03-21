@@ -14,16 +14,16 @@ var enumValue = MyEnum.ValueA
 
  /// 关联类型的基本使用
 enum Password {
-    case DeigtPassword(Int)
-    case StringPassword(String)
+    case deigtPassword(Int)
+    case stringPassword(String)
 }
 
-var password = Password.DeigtPassword(123456)
-password = .StringPassword("123456")
+var password = Password.deigtPassword(123456)
+password = .stringPassword("123456")
 
 switch password {
-case .DeigtPassword(let digit): print("这是数字密码： \(digit)")
-case .StringPassword(let digit): print("这是字符串密码： \(digit)")
+case .deigtPassword(let digit): print("这是数字密码： \(digit)")
+case .stringPassword(let digit): print("这是字符串密码： \(digit)")
 }
 
 /// 测试contains方法

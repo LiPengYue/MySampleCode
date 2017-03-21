@@ -288,15 +288,18 @@
 					9B5CEDFD1C66D44E003D0D6F = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = U2HX3RFD94;
+						LastSwiftMigration = 0810;
 					};
 					9B5CEE111C66D44F003D0D6F = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = U2HX3RFD94;
+						LastSwiftMigration = 0810;
 						TestTargetID = 9B5CEDFD1C66D44E003D0D6F;
 					};
 					9B5CEE1C1C66D44F003D0D6F = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = U2HX3RFD94;
+						LastSwiftMigration = 0810;
 						TestTargetID = 9B5CEDFD1C66D44E003D0D6F;
 					};
 				};
@@ -561,6 +564,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NEU.CustomTransition-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -573,6 +577,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NEU.CustomTransition-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -584,6 +589,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NEU.CustomTransition-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CustomTransition-Swift.app/CustomTransition-Swift";
 			};
 			name = Debug;
@@ -596,6 +602,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NEU.CustomTransition-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CustomTransition-Swift.app/CustomTransition-Swift";
 			};
 			name = Release;
@@ -607,6 +614,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NEU.CustomTransition-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "CustomTransition-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -619,6 +627,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "NEU.CustomTransition-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "CustomTransition-Swift";
 				USES_XCTRUNNER = YES;
 			};

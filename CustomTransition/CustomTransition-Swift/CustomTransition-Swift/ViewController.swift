@@ -10,11 +10,11 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: UIScreen.mainScreen().bounds, style: .Plain)
+        let tableView = UITableView(frame: UIScreen.main.bounds, style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = true
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         return tableView
     }()
     
@@ -39,15 +39,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 // MARK: - 实现UITableViewDelegate协议
 extension ViewController {
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nav: UINavigationController
         switch indexPath.row {
         case 0:
@@ -61,31 +61,31 @@ extension ViewController {
             break
         }
         // http://stackoverflow.com/questions/22585416/slow-performance-for-presentviewcontroller-depends-on-complexity-of-presenting
-        dispatch_async(dispatch_get_main_queue()) {
-            self.presentViewController(nav, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(nav, animated: true, completion: nil)
         }
     }
 }
 
 // MARK: - 实现UITableViewDataSource协议
 extension ViewController {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return headetTitleArray.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellTitleArray.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let tableViewCell = UITableViewCell(style: .Subtitle, reuseIdentifier: String(UITableViewCell))
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let tableViewCell = UITableViewCell(style: .subtitle, reuseIdentifier: String(UITableViewCell))
         tableViewCell.textLabel?.text = cellTitleArray[indexPath.row]
         tableViewCell.detailTextLabel?.text = cellSubtitleArray[indexPath.row]
-        tableViewCell.selectionStyle = .None
+        tableViewCell.selectionStyle = .none
         return tableViewCell
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return headetTitleArray[section]
     }
 }

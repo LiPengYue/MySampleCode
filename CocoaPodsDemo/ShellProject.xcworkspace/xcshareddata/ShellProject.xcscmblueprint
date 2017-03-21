@@ -9,7 +9,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "374E162E-2A30-4B89-BEBA-6B8FDE39D0C7",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "054FA612D81390BCA914FF3E911AFB6ED941DB7C" : "SampleCode\/",
+    "054FA612D81390BCA914FF3E911AFB6ED941DB7C" : "%E5%A4%A7%E7%A5%9E%E7%9A%84%E8%BD%AC%E5%9C%BA%E5%8A%A8%E7%94%BBswift\/",
     "C71A612E55CCF042C9D0404A97F793518FAC0059" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ShellProject",

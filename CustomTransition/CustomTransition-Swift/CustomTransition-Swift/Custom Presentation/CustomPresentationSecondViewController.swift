@@ -27,16 +27,16 @@ class CustomPresentationSecondViewController: UIViewController {
 
 // MARK: - Layout
 extension CustomPresentationSecondViewController {
-    func updatePreferredContentSizeWithTraitCollection(traitCollection: UITraitCollection) {
-        self.preferredContentSize = CGSizeMake(self.view.bounds.size.width, traitCollection.verticalSizeClass == .Compact ? 270 : 420)
+    func updatePreferredContentSizeWithTraitCollection(_ traitCollection: UITraitCollection) {
+        self.preferredContentSize = CGSize(width: self.view.bounds.size.width, height: traitCollection.verticalSizeClass == .compact ? 270 : 420)
         
         slider.maximumValue = Float(self.preferredContentSize.height)
         slider.minimumValue = 220
         slider.value = self.slider.maximumValue
     }
     
-    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
         self.updatePreferredContentSizeWithTraitCollection(newCollection)
     }
 }
@@ -44,11 +44,11 @@ extension CustomPresentationSecondViewController {
 // MARK: - UI事件处理
 extension CustomPresentationSecondViewController {
     func buttonDidClicked() {
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    func sliderValueChange(sender: UISlider) {
-        self.preferredContentSize = CGSizeMake(self.view.bounds.size.width, CGFloat(sender.value))
+    func sliderValueChange(_ sender: UISlider) {
+        self.preferredContentSize = CGSize(width: self.view.bounds.size.width, height: CGFloat(sender.value))
     }
 }
 
@@ -60,7 +60,7 @@ extension CustomPresentationSecondViewController {
         /// 创建label
         let label = UILabel()
         label.text = "To"
-        label.textAlignment = .Center
+        label.textAlignment = .center
         label.font = UIFont(name: "Helvetica", size: 60)
         view.addSubview(label)
         label.snp_makeConstraints { (make) -> Void in
@@ -75,13 +75,13 @@ extension CustomPresentationSecondViewController {
             make.left.equalTo(view).offset(20)
             make.height.equalTo(30)
         }
-        slider.addTarget(self, action: Selector("sliderValueChange:"), forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: Selector("sliderValueChange:"), for: .valueChanged)
         
         /// 创建button
         let button = UIButton()
-        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        button.setTitle("Dismiss", forState: .Normal)
-        button.addTarget(self, action: Selector("buttonDidClicked"), forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.blue, for: UIControlState())
+        button.setTitle("Dismiss", for: UIControlState())
+        button.addTarget(self, action: Selector("buttonDidClicked"), for: .touchUpInside)
         view.addSubview(button)
         button.snp_makeConstraints { (make) -> Void in
             make.bottom.equalTo(view).offset(-20)

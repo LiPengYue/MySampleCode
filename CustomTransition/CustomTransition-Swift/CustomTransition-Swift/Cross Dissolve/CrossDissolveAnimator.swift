@@ -9,38 +9,38 @@
 import UIKit
 
 class CrossDissolveAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.35
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
-        let containerView = transitionContext.containerView()
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
+        let containerView = transitionContext.containerView
         
         var fromView = fromViewController?.view
         var toView = toViewController?.view
         
-        if transitionContext.respondsToSelector(Selector("viewForKey:")) {
-            fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)
-            toView = transitionContext.viewForKey(UITransitionContextToViewKey)
+        if transitionContext.responds(to: Selector("viewForKey:")) {
+            fromView = transitionContext.view(forKey: UITransitionContextViewKey.from)
+            toView = transitionContext.view(forKey: UITransitionContextViewKey.to)
         }
         
-        fromView?.frame = transitionContext.initialFrameForViewController(fromViewController!)
-        toView?.frame = transitionContext.finalFrameForViewController(toViewController!)
+        fromView?.frame = transitionContext.initialFrame(for: fromViewController!)
+        toView?.frame = transitionContext.finalFrame(for: toViewController!)
         
         fromView?.alpha = 1.0
         toView?.alpha = 0.0
     
         containerView?.addSubview(toView!)
         
-        let transitionDuration = self.transitionDuration(transitionContext)
-        UIView.animateWithDuration(transitionDuration, animations: {
+        let transitionDuration = self.transitionDuration(using: transitionContext)
+        UIView.animate(withDuration: transitionDuration, animations: {
             fromView!.alpha = 0.0
             toView!.alpha = 1.0
-            }) { (finished: Bool) -> Void in
-                let wasCancelled = transitionContext.transitionWasCancelled()
+            }, completion: { (finished: Bool) -> Void in
+                let wasCancelled = transitionContext.transitionWasCancelled
                 transitionContext.completeTransition(!wasCancelled)
-        }
+        }) 
     }
 }

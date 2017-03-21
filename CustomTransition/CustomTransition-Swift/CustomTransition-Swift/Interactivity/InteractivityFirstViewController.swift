@@ -18,12 +18,12 @@ class InteractivityFirstViewController: UIViewController {
         setupView() // 主要是一些UI控件的布局，可以无视其实现细节
         
         /// 添加滑动交互手势
-        interactiveTransitionRecognizer.edges = .Right
+        interactiveTransitionRecognizer.edges = .right
         self.view.addGestureRecognizer(interactiveTransitionRecognizer)
         
         /// 设置动画代理
         interactivitySecondViewController.transitioningDelegate = customTransitionDelegate
-        interactivitySecondViewController.modalPresentationStyle = .FullScreen
+        interactivitySecondViewController.modalPresentationStyle = .fullScreen
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,11 +34,11 @@ class InteractivityFirstViewController: UIViewController {
 
 // MARK: - 手势识别
 extension InteractivityFirstViewController {
-    func interactiveTransitionRecognizerAction(sender: UIScreenEdgePanGestureRecognizer) {
+    func interactiveTransitionRecognizerAction(_ sender: UIScreenEdgePanGestureRecognizer) {
         /**
         *  在开始触发手势时，调用animationButtonDidClicked方法，只会调用一次
         */
-        if sender.state == .Began {
+        if sender.state == .began {
             self.animationButtonDidClicked(sender)
         }
     }
@@ -52,20 +52,20 @@ extension InteractivityFirstViewController {
      
      :param: sender 事件的发送者，可能是button，也有可能是手势
      */
-    func animationButtonDidClicked(sender: AnyObject) {
-        if sender.isKindOfClass(UIGestureRecognizer) {
+    func animationButtonDidClicked(_ sender: AnyObject) {
+        if sender.isKind(of: UIGestureRecognizer) {
             customTransitionDelegate.gestureRecognizer = interactiveTransitionRecognizer
         }
         else {
             customTransitionDelegate.gestureRecognizer = nil
         }
         /// 设置targetEdge为右边，也就是检测从右边向左滑动的手势
-        customTransitionDelegate.targetEdge = .Right
-        self.presentViewController(interactivitySecondViewController, animated: true, completion: nil)
+        customTransitionDelegate.targetEdge = .right
+        self.present(interactivitySecondViewController, animated: true, completion: nil)
     }
     
     func leftBarButtonDidClicked() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -76,7 +76,7 @@ extension InteractivityFirstViewController {
         
         /// 设置navigationItem
         navigationItem.title = "交互式动画"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("leftBarButtonDidClicked"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.plain, target: self, action: Selector("leftBarButtonDidClicked"))
         
         /// 创建label
         let label = UILabel()
@@ -91,9 +91,9 @@ extension InteractivityFirstViewController {
         
         /// 创建button
         let button = UIButton()
-        button.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        button.setTitle("演示动画", forState: .Normal)
-        button.addTarget(self, action: Selector("animationButtonDidClicked:"), forControlEvents: .TouchUpInside)
+        button.setTitleColor(UIColor.blue, for: UIControlState())
+        button.setTitle("演示动画", for: UIControlState())
+        button.addTarget(self, action: Selector("animationButtonDidClicked:"), for: .touchUpInside)
         view.addSubview(button)
         button.snp_makeConstraints { (make) -> Void in
             make.centerX.equalTo(view)
